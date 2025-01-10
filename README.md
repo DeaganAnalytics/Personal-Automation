@@ -17,3 +17,21 @@ The R scripts in this repo are a collection of functions I have developed over t
 | Load Package | load_package.R | A function that loads an R package using the library function and checks that the version matches the specified version.|
 
 The remaining R scripts and functions are relatively simply and self explanatory.
+
+## R Project Files
+These files are generated when creating an R Project.
+
+## Python Scripts
+The Python scripts in this repo are a collection of administrative tasks I have automated over time. The table below provides more detail on the major scripts.
+
+| File Name| Description |
+|----------|----------|
+| clear_downloads.py | A script that clears the downloads folder on a pc. |
+| clear_recycle_bin.py | A script to clear the recyling bin on a windows pc. |
+| create_outlook_sa_holidays.py | A script that creates all day calendar events in Microsoft Outlook for each public holiday in South Autralia. |
+| format_piped_code.py | A script that formats piped R code to match my personal preference. |
+| sql_keyword_to_uppercase.py | A script that coverts SQL keywords in a .sql file to uppercase matching my personal preference. |
+| xml_to_csv.py | A script that converts an XML file to CSV. |
+
+## Batch Scripts
+The Batch scripts in this repo are relatively trivial and aren't used in any regular capacity. They are the result of me experimenting with .bat files.
