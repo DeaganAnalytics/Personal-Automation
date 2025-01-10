@@ -1,4 +1,4 @@
-# Check Missing Data: A function to check if a data frame contains 0s, NAs or both
+# A function to check if a data frame contains 0s, NAs or both
 
 `%notin%` <- Negate(`%in%`)
 
@@ -49,3 +49,30 @@ check_missing_data <- function(df, columns = NULL, override = FALSE, check_type 
   
   return(df) # Return the data frame after the check
 }
+
+# Example usage of check_missing_data function
+
+# Create a sample data frame
+example_df <- data.frame(Column1 = c(1, 2, 3, 4, 5),
+                         Column2 = c(10, 0, 30, 40, 50),  # Contains a zero
+                         Column3 = c(100, 200, NA, 400, 500)) # Contains an NA
+
+# Print the original data frame
+print("Original Data Frame:")
+print(example_df)
+
+# Check for both zeros and NAs in all columns except the first
+print("Checking for both zeros and NAs:")
+try(check_missing_data(example_df, check_type = "both"))
+
+# Check only for zeros in all columns except the first
+print("Checking for zeros:")
+try(check_missing_data(example_df, check_type = "zero"))
+
+# Check only for NAs in a specific column (Column 3)
+print("Checking for NAs in Column 3:")
+try(check_missing_data(example_df, columns = 3, check_type = "NA"))
+
+# Using the override parameter to skip the data check
+print("Skipping the data check with override:")
+check_missing_data(example_df, override = TRUE)
