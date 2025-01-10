@@ -1,4 +1,5 @@
 # This file calculates the end of the previous month, quarter, half year and year, based on today's date
+library(lubridate)
 
 # Previous Month End
 pm_end <- as.character(floor_date(Sys.Date(), "month") - 1)
