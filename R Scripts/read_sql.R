@@ -3,6 +3,8 @@ library(DBI)      # For dbGetQuery
 library(readr)    # For read_file
 library(gsubfn)   # For reading the sql file
 
+`%notin%` <- Negate(`%in%`)
+
 read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, param_values = NA, 
                      extra_sql_name = NA, extra_sql_query = NA, min_row = 0, override = FALSE) {
   
