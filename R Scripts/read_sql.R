@@ -5,7 +5,7 @@ library(gsubfn)   # For reading the sql file
 
 `%notin%` <- Negate(`%in%`)
 
-read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, param_values = NA, 
+read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, param_values = NA, print_param = TRUE,
                      extra_sql_name = NA, extra_sql_query = NA, min_row = 0, override = FALSE) {
   
   # Validate function parameters ----
@@ -17,6 +17,9 @@ read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, 
   
   if (!is.logical(override))
     stop("Error: override must be a logical value (TRUE or FALSE).")
+
+  if (!is.logical(print_param))
+    stop("Error: print_param must be a logical value (TRUE or FALSE).")
   
   if (length(param_names) != length(param_values))
     stop(paste0("Error: param_names and param_values have different lengths (", length(param_names), " vs ", length(param_values), ")."))
@@ -44,7 +47,9 @@ read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, 
     for (i in seq(param_names)) assign(param_names[i], param_values[i])
     
     # Prints out the assigned values
-    for (i in seq(param_names)) print(paste0("Parameter: ", param_names[i], " = '", param_values[i], "'")) 
+    if (print_param == TRUE) {
+      for (i in seq(param_names)) print(paste0("Parameter: ", param_names[i], " = '", param_values[i], "'")) 
+    }
   }
   
   # Import and assign extra SQL parameters ----
