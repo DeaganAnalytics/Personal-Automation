@@ -9,6 +9,7 @@ This file is a simplified version of a model I built using K-Prototypes and K Ne
 ```{r setup, include=FALSE}
 library(dplyr)
 library(clustMixType)
+library(VIM)
 
 # Function to set 20% of columns to NAs
 set_na_pct <- function(x, pct = 0.2) {
