@@ -1,25 +1,19 @@
-# About this Repo
-This repository contains a collection of scripts I have developed to automate processes and analyse data.
+# About This Repo
+This repository contains a collection of scripts I've developed to automate tasks and analyse data, using a mix of R, Python, batch files, and SQL.
 
-The repo is currently broken up into separate folders:
- - R
- - Python
- - Batch Scripts
- - SQL
+The repo is organised into the following folders:
+- **R** – Reporting and data automation using R functions and scripts
+- **Python** – Small tools for automating administrative tasks
+- **Batch Scripts** – Toy examples created while experimenting with `.bat` files
+- **SQL** – Reusable SQL queries and templates
 
 ## R
-The R scripts in this repo are a collection of functions I have developed over time to assist with automating reports and processes. The table below provides more detail on the major functions.
+This folder contains a collection of R functions and scripts built over time to support reporting and process automation. The table inside `R/README.md` provides more detail on the major functions.
 
-| Function Name| Script Name| Description |
-|----------|----------|----------|
-| Read SQL | read_sql.R | A function that reads an .sql file, connects to a database, runs the query and passes in parameters to the query, with error handling. It then assigns the imported data frame to an R variable.|
-| Read Text | read_text.R | A function that that reads a .txt file, optionally passes in parameters, and assigns the text to an R variable.|
-| Load Package | load_package.R | A function that loads an R package using the library function and checks that the version matches the specified version.|
-
-The remaining R scripts and functions are relatively simply and self explanatory.
+Other scripts and helper functions are relatively simple and self-explanatory.
 
 ## Python
-The Python scripts in this repo are a collection of administrative tasks I have automated over time.
+A small set of Python scripts used to automate administrative or repetitive tasks, typically for personal use or internal workflow improvements.
 
 ## Batch Scripts
-The Batch scripts in this repo are relatively trivial and aren't used in any regular capacity. They are the result of me experimenting with .bat files.
+These are lightweight `.bat` files created while experimenting with Windows batch scripting. They’re mostly trivial and not used regularly, but kept here for reference.
