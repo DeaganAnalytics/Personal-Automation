@@ -34,8 +34,8 @@ read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, 
     stop("Error: The values passed through the extra_sql_name parameter contain punctuation marks. Please remove these for the function to work.")
   
   # Set file path ----
-  file_path <- paste0("H:/Personal-Automation/R Scripts/", folder, "/")
-  extra_file_path <- paste0("H:/Personal-Automation/R Scripts/Extra SQL/")
+  file_path <- paste0("H:/Personal-Automation/R/", folder, "/")
+  extra_file_path <- paste0("H:/Personal-Automation/R/Extra SQL/")
   
   cat(paste0("-- Query: ", file_path, query, "\n"))
   
