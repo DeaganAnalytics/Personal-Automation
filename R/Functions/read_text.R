@@ -2,7 +2,7 @@ read_text <- function(folder, file, param_names = NA, param_values = NA) {
   
   # Set file path - expand to have more text folders if required
   if (folder == "Text") {
-    file_path <- "H:/Personal-Automation/R Scripts/Text/"
+    file_path <- "H:/Personal-Automation/R/Text/"
   }
   
   # Combine file path and file name
