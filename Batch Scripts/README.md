@@ -5,7 +5,7 @@ I started exploring batch files during one job where I had automated saving file
 
 The examples here are:
 
-| Script Name         | Description                                         | What It Does                                                                 |
+| Script Name         | Description                                         | Purpose                                                                      |
 |---------------------|-----------------------------------------------------|------------------------------------------------------------------------------|
 | open_programs.bat   | Open a few programs while closing others            | Opens Outlook, Teams, and Edge; closes Lifesize                              |
 | close_programs.bat  | Close common applications I have open               | Closes Outlook, Teams, Excel, Word, RStudio, PyCharm, Edge, etc.             |
