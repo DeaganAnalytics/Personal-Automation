@@ -1,0 +1,53 @@
+/* ============================================================
+   SYNTHETIC CUSTOMER INTERACTION REPORT
+   Test data for Power BI SQL cleaner
+   ============================================================ */
+
+WITH CustomerInteractions AS
+(
+	SELECT
+		CI.InteractionID,
+		CI.CustomerID,
+		CAST(CI.CreatedDate AS datetime) AS CreatedDate,
+		CI.InteractionType,
+		CI.Status,
+		CASE
+			WHEN CI.Status = 'Closed' THEN 1
+			WHEN CI.Status = 'Cancelled' THEN 0
+			ELSE NULL
+		END AS IsResolved
+	FROM dbo.InteractionBase CI
+	WHERE CI.CreatedDate >= '2025-01-01'
+		AND CI.InteractionType IN ('Email', 'Phone', 'Web Form')
+		AND CI.IsDeleted = 0
+),
+
+CustomerSummary AS
+(
+	SELECT
+		CustomerID,
+		COUNT(*) AS TotalInteractions,
+		SUM(IsResolved) AS ResolvedInteractions,
+		MAX(CreatedDate) AS LastInteractionDate
+	FROM CustomerInteractions
+	GROUP BY CustomerID
+)
+
+SELECT
+	C.CustomerID,
+	C.CustomerName,
+	CS.TotalInteractions,
+	CS.ResolvedInteractions,
+	CS.LastInteractionDate,
+	CASE
+		WHEN CS.TotalInteractions >= 10 THEN 'High Activity'
+		WHEN CS.TotalInteractions BETWEEN 5 AND 9 THEN 'Medium Activity'
+		ELSE 'Low Activity'
+	END AS ActivityCategory
+FROM dbo.CustomerBase C
+INNER JOIN CustomerSummary CS
+	ON C.CustomerID = CS.CustomerID
+WHERE C.IsActive = 1
+	AND C.CustomerType NOT IN ('Test', 'Internal')
+	AND (CS.TotalInteractions > 2 OR CS.ResolvedInteractions >= 1)
+ORDER BY CS.TotalInteractions DESC, C.CustomerName ASC
