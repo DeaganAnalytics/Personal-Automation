@@ -4,7 +4,7 @@ This repository contains a collection of scripts I've developed to automate task
 The repo is organised into the following folders:
 - **[R](R/README.md)** - Reporting and data automation using R functions and scripts
 - **[Python](Python/README.md)** - Small tools for automating administrative tasks
-- **[Batch Scripts](Batch%20Scripts/README.md)** - Toy examples created while experimenting with `.bat` files
+- **[Batch Scripts](Batch%20Scripts/README.md)** - Windows batch automation and archived examples
 - **[SQL](SQL/)** - Standalone SQL Server query templates. The [R SQL examples](R/SQL/) are inputs for the R query helper.
 
 ## Start here
@@ -24,4 +24,4 @@ Other scripts and helper functions are relatively simple and self-explanatory.
 A small set of Python scripts used to automate administrative or repetitive tasks, typically for personal use or internal workflow improvements.
 
 ## Batch Scripts
-These are lightweight `.bat` files created while experimenting with Windows batch scripting. They’re mostly trivial and not used regularly, but kept here for reference.
+Earlier Windows batch scripting experiments are kept in [the archive](Batch%20Scripts/archive/).
