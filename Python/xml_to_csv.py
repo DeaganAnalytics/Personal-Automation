@@ -1,3 +1,4 @@
+import argparse
 import xml.etree.ElementTree as ET
 import csv
 
@@ -19,7 +20,13 @@ def xml_to_csv(xml_file, csv_file):
             row = [elem.text for elem in child]
             writer.writerow(row)
 
-# Example usage
-xml_file = 'C:/Users/seamus.deagan/Desktop/Test folder/input.xml'  # Replace with your XML file path
-csv_file = 'C:/Users/seamus.deagan/Desktop/Test folder/output2.csv'  # Replace with your desired CSV file path
-xml_to_csv(xml_file, csv_file)
+def main():
+    parser = argparse.ArgumentParser(description="Convert a flat XML table to CSV.")
+    parser.add_argument("input", help="XML file to read")
+    parser.add_argument("output", help="CSV file to write")
+    args = parser.parse_args()
+    xml_to_csv(args.input, args.output)
+
+
+if __name__ == "__main__":
+    main()

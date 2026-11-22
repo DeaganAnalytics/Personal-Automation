@@ -1,12 +1,6 @@
-read_text <- function(folder, file, param_names = NA, param_values = NA) {
+read_text <- function(folder, file, param_names = NA, param_values = NA, base_dir = ".") {
   
-  # Set file path - expand to have more text folders if required
-  if (folder == "Text") {
-    file_path <- "H:/Personal-Automation/R/Text/"
-  }
-  
-  # Combine file path and file name
-  full_path <- paste0(file_path, file)
+  full_path <- file.path(base_dir, folder, file)
   
   # Read text file
   text_content <- readLines(full_path, warn = FALSE)
@@ -28,11 +22,3 @@ read_text <- function(folder, file, param_names = NA, param_values = NA) {
   
   return(text_content)
 }
-
-# Example with no parameters
-example_1 <- read_text("Text", "example_1.txt")
-example_1
-
-# Example with parameters
-example_2 <- read_text("Text", "example_2.txt", param_names = c("word1", "word2"), param_values = c("two", "parameters"))
-example_2
