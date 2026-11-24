@@ -1,6 +1,10 @@
-import argparse
 import re
 from pathlib import Path
+
+# File paths
+folder = Path(r"C:\Scripts\sql_cleaner")
+input_file = folder / "input.txt"
+output_file = folder / "output.txt"
 
 # SQL keywords and common SQL Server functions
 keywords = {
@@ -70,17 +74,14 @@ def clean_sql(sql):
     return sql + "\n"
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Clean SQL copied from Power BI.")
-    parser.add_argument("input", type=Path, help="Text file containing SQL")
-    parser.add_argument("output", type=Path, help="File for the cleaned SQL")
-    args = parser.parse_args()
+# Read, clean and save
+if not input_file.exists():
+    raise FileNotFoundError(f"Input file not found: {input_file}")
 
-    sql = args.input.read_text(encoding="utf-8-sig")
-    with args.output.open("w", encoding="utf-8", newline="\r\n") as output:
-        output.write(clean_sql(sql))
-    print(f"SQL cleaned successfully: {args.output}")
+sql = input_file.read_text(encoding="utf-8-sig")
+cleaned_sql = clean_sql(sql)
 
+with output_file.open("w", encoding="utf-8", newline="\r\n") as file:
+    file.write(cleaned_sql)
 
-if __name__ == "__main__":
-    main()
+print(f"SQL cleaned successfully: {output_file}")
