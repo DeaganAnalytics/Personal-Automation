@@ -4,7 +4,10 @@ library(lubridate)
 date <- Sys.Date()
 
 # Create a date string in the format of "MMM YYYY" based on x months from the start of the financial year
-fytd_month <- function(x) {
+fytd_month <- function(x, fy_start = NULL) {
+  if (is.null(fy_start)) {
+    fy_start <- if (month(date) > 6) make_date(year(date), 7, 1) else make_date(year(date) - 1, 7, 1)
+  }
   format(ymd(fy_start) + months(x), "%b %Y")
 }
 
@@ -12,7 +15,7 @@ fytd_month <- function(x) {
 month_end <- function(m) {as.character(ceiling_date(ymd(date) %m-% months(m), "months") %m-% days(1))}
 
 # Take the current date (from the date variable) and subtracts y years
-year_subtract <- function(y) {ymd(date) - years(y)}a
+year_subtract <- function(y) {ymd(date) - years(y)}
 
 # Take the current date (from the date variable) and adds y years
 year_add <- function(y) {ymd(date) + years(y)}

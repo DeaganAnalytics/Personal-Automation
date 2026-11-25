@@ -4,13 +4,10 @@ library(fs)
 
 # For this to work, you first need to sync SharePoint to your One Drive by navigating to the data file in SharePoint and pressing the sync button.
 
-read_one_drive_file <- function(filename, subfolders = NULL) {
-  
-  # Hardcoded base directory for synced OneDrive folder - can update to dynamically select user name if needed
-  base_dir <- "" # insert OneDrive folder path here.
+read_one_drive_file <- function(filename, subfolders = NULL, base_dir = ".") {
   
   # Build full path
-  full_path <- fs::path(base_dir, fs::path_join(subfolders), filename)
+  full_path <- fs::path_join(c(base_dir, subfolders, filename))
   
   # Check file existence
   if (!fs::file_exists(full_path)) {
@@ -29,5 +26,6 @@ read_one_drive_file <- function(filename, subfolders = NULL) {
     stop("Unsupported file type: '", ext, "'. Only .csv, .xls, and .xlsx are supported.")
   }
   
-  cat(paste0("Reading ", filename, " from ", fs::path(base_dir, subfolders), "\n"))
+  message("Reading ", full_path)
+  df
 }

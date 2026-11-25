@@ -6,7 +6,8 @@ library(gsubfn)   # For reading the sql file
 `%notin%` <- Negate(`%in%`)
 
 read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, param_values = NA, print_param = TRUE,
-                     extra_sql_name = NA, extra_sql_query = NA, min_row = 0, override = FALSE) {
+                     extra_sql_name = NA, extra_sql_query = NA, min_row = 0, override = FALSE,
+                     base_dir = ".", extra_sql_dir = file.path(base_dir, "Extra SQL")) {
   
   # Validate function parameters ----
   if (folder %notin% c("SQL")) # expand folder range as needed
@@ -34,21 +35,20 @@ read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, 
     stop("Error: The values passed through the extra_sql_name parameter contain punctuation marks. Please remove these for the function to work.")
   
   # Set file path ----
-  file_path <- paste0("H:/Personal-Automation/R/", folder, "/")
-  extra_file_path <- paste0("H:/Personal-Automation/R/Extra SQL/")
+  file_path <- file.path(base_dir, folder)
   
-  cat(paste0("-- Query: ", file_path, query, "\n"))
+  cat(paste0("-- Query: ", file.path(file_path, query), "\n"))
   
   # Import and assign parameters
   if (missing(param_names) || missing(param_values)) {
     print("No parameters supplied.")
   } else {
     # Assign param_value[i] to param_names[i]
-    for (i in seq(param_names)) assign(param_names[i], param_values[i])
+    for (i in seq_along(param_names)) assign(param_names[i], param_values[i])
     
     # Prints out the assigned values
     if (print_param == TRUE) {
-      for (i in seq(param_names)) print(paste0("Parameter: ", param_names[i], " = '", param_values[i], "'")) 
+      for (i in seq_along(param_names)) print(paste0("Parameter: ", param_names[i], " = '", param_values[i], "'"))
     }
   }
   
@@ -56,21 +56,21 @@ read_sql <- function(connection = con, query, folder = "SQL", param_names = NA, 
   if (missing(extra_sql_name) || missing(extra_sql_query)) { # If missing, do nothing
   } else {
     
-    for (i in seq(extra_sql_name)) {
+    for (i in seq_along(extra_sql_name)) {
       if (extra_sql_query[i] == "") { assign(extra_sql_name[i], "")
         # Assign extra_sql_query[i] to extra_sql_name[i] (fn$identity is used to pass through parameters)
-      } else assign(extra_sql_name[i], fn$identity(read_file(paste(extra_file_path, extra_sql_query[i], sep = ""))))
+      } else assign(extra_sql_name[i], fn$identity(read_file(file.path(extra_sql_dir, extra_sql_query[i]))))
     }
     
-    for (i in seq(extra_sql_name)) {
+    for (i in seq_along(extra_sql_name)) {
       if (extra_sql_query[i] == "") { print(paste0("Extra SQL parameter: ", extra_sql_name[i], " - ignored."))
         # Prints out the assigned values
-      } else print(paste0("Extra SQL: ", extra_sql_name[i], " imported from '", extra_file_path, extra_sql_query[i], "'"))
+      } else print(paste0("Extra SQL: ", extra_sql_name[i], " imported from '", file.path(extra_sql_dir, extra_sql_query[i]), "'"))
     }
   }
   
   # Read query ----
-  full_query <- read_file(paste(file_path, query, sep = ""))
+  full_query <- read_file(file.path(file_path, query))
   
   # Create print_query function for troubleshooting purposes
   print_query <<- function() { cat(fn$identity(full_query)) }

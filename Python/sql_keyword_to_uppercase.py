@@ -1,16 +1,6 @@
-import os
+import argparse
+from pathlib import Path
 
-test_folder = <insert folder path here>
-
-# Specify file name
-file_name = "test2.sql"
-
-# Specify the path to your SQL file
-sql_file_path = os.path.join(test_folder, file_name)
-
-# Read the contents of the SQL file and stores in as sql_text
-with open(sql_file_path, 'r') as file:
-    sql_text = file.read()
 
 def uppercase_specific_words(text, words_to_uppercase):
     """
@@ -46,5 +36,13 @@ end_words = ["order", "group", "by", "having", "desc"]
 
 words_to_change = main_words + condition_words + join_words + function_words + aggregate_function_words + end_words
 
-result = uppercase_specific_words(sql_text, words_to_change)
-print(result)
+def main():
+    parser = argparse.ArgumentParser(description="Uppercase selected SQL keywords.")
+    parser.add_argument("input", type=Path, help="SQL file to format")
+    args = parser.parse_args()
+    sql_text = args.input.read_text(encoding="utf-8-sig")
+    print(uppercase_specific_words(sql_text, words_to_change))
+
+
+if __name__ == "__main__":
+    main()
